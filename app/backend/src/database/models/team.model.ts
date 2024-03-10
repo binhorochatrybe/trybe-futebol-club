@@ -1,13 +1,13 @@
 import {
   Model,
-  InferAttributes, InferCreationAttributes, CreationOptional, DataTypes
+  InferAttributes, InferCreationAttributes, CreationOptional, DataTypes,
 } from 'sequelize';
 import db from '.';
 
 class team extends Model<InferAttributes<team>, InferCreationAttributes<team>> {
   declare id: CreationOptional<number>;
   declare teamName: string;
-};
+}
 
 team.init({
   id: {
