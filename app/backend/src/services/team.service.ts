@@ -6,6 +6,11 @@ class TeamService {
     console.log(data);
     return data;
   }
+
+  static async getTeamById(id: number) {
+    const team = await TeamModel.findOne({ where: { id } });
+    return team;
+  }
 }
 
 export default TeamService;

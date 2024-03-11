@@ -11,5 +11,16 @@ class TeamController {
       console.log(error);
     }
   }
+
+  static async getTeamBydID(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const teamByID = await TeamService.getTeamById(Number(id));
+      res.status(200).json(teamByID);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
 }
 export default TeamController;
