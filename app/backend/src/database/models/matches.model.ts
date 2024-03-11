@@ -1,4 +1,3 @@
-
 import { Model, DataTypes } from 'sequelize';
 import db from './index';
 import Team from './team.model';
