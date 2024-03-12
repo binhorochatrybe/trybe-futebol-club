@@ -11,6 +11,16 @@ class LoginController {
       console.log(error);
     }
   }
+
+  static async returnRole(req: Request, res: Response) {
+    try {
+      const { role } = req.body;
+      console.log(role);
+      res.status(200).json({ role });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default LoginController;

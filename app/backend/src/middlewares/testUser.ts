@@ -10,9 +10,7 @@ const validateLogin = async (req: Request, res: Response, next: NextFunction) =>
   if (!email || !password) {
     return res.status(400).json({ message: 'All fields must be filled' });
   }
-
   const emailRegex = /^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/;
-
   if (!emailRegex.test(email) || password.length < 6) {
     return res.status(401).json({ message: 'Invalid email or password' });
   }
