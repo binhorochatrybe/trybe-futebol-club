@@ -25,6 +25,17 @@ class MatchController {
       console.log(error);
     }
   }
+
+  static async updateMatchById(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const match = req.body;
+      await MatchesService.updateMatch(Number(id), match);
+      return res.status(200).json({ message: 'Match updated successfully.' });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default MatchController;

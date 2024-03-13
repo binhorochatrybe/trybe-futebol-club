@@ -1,6 +1,8 @@
 import MatchModel from '../database/models/matches.model';
 import Team from '../database/models/team.model';
 
+type MatchGoals = { homeTeamGoals: string, awayTeamGoals: string };
+
 class MatchesService {
   static async getAllMatches() {
     const matches = await MatchModel.findAll({
@@ -29,5 +31,13 @@ class MatchesService {
       { where: { id } },
     );
   }
+
+  static async updateMatch(id: number, match: MatchGoals) {
+    await MatchModel.update(
+      { homeTeamGoals: match.homeTeamGoals, awayTeamGoals: match.awayTeamGoals },
+      { where: { id } },
+    );
+  }
 }
+
 export default MatchesService;

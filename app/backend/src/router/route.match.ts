@@ -11,4 +11,8 @@ router
 router
   .patch('/:id/finish', tokenMiddle.validateToken, (req: Request, res: Response) => MatchController
     .returnFinishedMatch(req, res));
+
+router
+  .patch('/:id', tokenMiddle.validateToken, (req: Request, res: Response) => MatchController
+    .updateMatchById(req, res));
 export default router;
