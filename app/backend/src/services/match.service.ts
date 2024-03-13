@@ -3,6 +3,13 @@ import Team from '../database/models/team.model';
 
 type MatchGoals = { homeTeamGoals: string, awayTeamGoals: string };
 
+type NewMatch = {
+  homeTeamId: number,
+  awayTeamId: number,
+  homeTeamGoals: number,
+  awayTeamGoals: number
+};
+
 class MatchesService {
   static async getAllMatches() {
     const matches = await MatchModel.findAll({
@@ -37,6 +44,17 @@ class MatchesService {
       { homeTeamGoals: match.homeTeamGoals, awayTeamGoals: match.awayTeamGoals },
       { where: { id } },
     );
+  }
+
+  static async createMatch(body: NewMatch) {
+    const match = await MatchModel.create({
+      homeTeamId: body.homeTeamId,
+      homeTeamGoals: body.homeTeamGoals,
+      awayTeamId: body.awayTeamId,
+      awayTeamGoals: body.awayTeamGoals,
+      inProgress: true,
+    });
+    return match;
   }
 }
 

@@ -15,4 +15,8 @@ router
 router
   .patch('/:id', tokenMiddle.validateToken, (req: Request, res: Response) => MatchController
     .updateMatchById(req, res));
+
+router
+  .post('/', tokenMiddle.validateToken, (req: Request, res: Response) => MatchController
+    .returnCreatedMatch(req, res));
 export default router;
