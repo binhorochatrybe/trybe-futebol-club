@@ -32,6 +32,16 @@ class Board {
     const results = teams.map((team) => MatchRule.getHomeTeamScoreboard(team, defaultMatch));
     return MatchRule.organizeScoreboard(results);
   }
+
+  static async getGameAway() {
+    const teams = await TeamService.getTeams();
+    console.log('----------------------------------- HEREEEEEEE');
+    console.log(teams);
+    const matchesCompleted = await MatchesService.getMatchesInProgress(false);
+    const defaultMatch = this.mapMatches(matchesCompleted);
+    const results = teams.map((team) => MatchRule.getAwayTeamScoreboard(team, defaultMatch));
+    return MatchRule.organizeScoreboard(results);
+  }
 }
 
 export default Board;

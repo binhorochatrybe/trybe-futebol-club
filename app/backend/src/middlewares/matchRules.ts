@@ -29,6 +29,16 @@ interface Matches {
   inProgress: boolean,
 }
 
+const calculateScoreboardStats = (scoreboard: Scoreboard): Scoreboard => {
+  const updatedScoreboard: Scoreboard = {
+    ...scoreboard,
+    goalsBalance: scoreboard.goalsFavor - scoreboard.goalsOwn,
+    efficiency: Number(((scoreboard.totalPoints / (scoreboard.totalGames * 3)) * 100)
+      .toFixed(2)),
+  };
+  return updatedScoreboard;
+};
+
 const calculateMatchResult = (teamGoals: number, opponentGoals: number): Points => {
   if (teamGoals < opponentGoals) {
     return { points: 0, victory: 0, draw: 0, loss: 1 };
@@ -67,10 +77,27 @@ const getHomeTeamScoreboard = (Times: Teams, Partidas: Matches[]): Scoreboard =>
       scoreboard.totalLosses += result.loss;
     }
   });
-  scoreboard.goalsBalance = scoreboard.goalsFavor - scoreboard.goalsOwn;
-  scoreboard.efficiency = Number(((scoreboard.totalPoints / (scoreboard.totalGames * 3)) * 100)
-    .toFixed(2));
-  return scoreboard;
+  const updatedScoreboard = calculateScoreboardStats(scoreboard);
+  return updatedScoreboard;
+};
+
+const getAwayTeamScoreboard = (Times: Teams, Partidas: Matches[]): Scoreboard => {
+  const scoreboard = scoreboardFunc();
+  scoreboard.name = Times.teamName;
+  Partidas.forEach((match) => {
+    if (Times.id === match.awayTeamId) {
+      const response = calculateMatchResult(match.awayTeamGoals, match.homeTeamGoals);
+      scoreboard.goalsFavor += match.awayTeamGoals;
+      scoreboard.goalsOwn += match.homeTeamGoals;
+      scoreboard.totalPoints += response.points;
+      scoreboard.totalGames += 1;
+      scoreboard.totalVictories += response.victory;
+      scoreboard.totalDraws += response.draw;
+      scoreboard.totalLosses += response.loss;
+    }
+  });
+  const updatedScoreboard = calculateScoreboardStats(scoreboard);
+  return updatedScoreboard;
 };
 
 const organizeScoreboard = (scoreboards: Scoreboard[]):Scoreboard[] => scoreboards.sort((a, b) =>
@@ -80,4 +107,4 @@ const organizeScoreboard = (scoreboards: Scoreboard[]):Scoreboard[] => scoreboar
   || b.goalsFavor - a.goalsFavor
   || b.efficiency - a.efficiency);
 
-export default { getHomeTeamScoreboard, organizeScoreboard };
+export default { getHomeTeamScoreboard, organizeScoreboard, getAwayTeamScoreboard };
