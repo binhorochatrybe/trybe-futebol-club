@@ -3,7 +3,7 @@ import Team from '../database/models/team.model';
 
 type MatchGoals = { homeTeamGoals: string, awayTeamGoals: string };
 
-type NewMatch = {
+export type NewMatch = {
   homeTeamId: number,
   awayTeamId: number,
   homeTeamGoals: number,

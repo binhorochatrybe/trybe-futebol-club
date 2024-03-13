@@ -41,7 +41,8 @@ class MatchController {
     try {
       const match = req.body;
       const newMatch = await MatchesService.createMatch(match);
-      return res.status(200).json(newMatch);
+      console.log(newMatch);
+      return res.status(201).json(newMatch);
     } catch (error) {
       console.log(error);
     }
