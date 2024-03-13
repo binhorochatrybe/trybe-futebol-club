@@ -15,6 +15,16 @@ class MatchController {
       res.status(500).json({ error });
     }
   }
+
+  static async returnFinishedMatch(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      await MatchesService.finishMatch(Number(id));
+      res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default MatchController;
