@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Testes de Times', () => {
+describe('Testes Team', () => {
   let chaiHttpResponse;
 
   afterEach(() => {
@@ -40,7 +40,7 @@ describe('Testes de Times', () => {
   const teams = teamsData.map(team => TeamModel.build(team));
   const team = TeamModel.build(teamData);
 
-  it('Deve retornar todos os times', async () => {
+  it('Deve retornar todos os times do banco de dados', async () => {
     sinon.stub(TeamModel, "findAll").resolves(teams);
     chaiHttpResponse = await chai.request(app).get('/teams');
     const teamsDataValues = teams.map(team => team.dataValues);
@@ -51,7 +51,7 @@ describe('Testes de Times', () => {
     expect(chaiHttpResponse.body).to.deep.equal(teamsDataValues);
   });
 
-  it('Deve retornar um time pelo ID', async () => {
+  it('Deve retornar um time de acordo com o ID', async () => {
     sinon.stub(TeamModel, "findByPk").resolves(team);
     chaiHttpResponse = await chai.request(app).get('/teams/5');
     console.log(team.dataValues);
