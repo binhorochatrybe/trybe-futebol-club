@@ -10,8 +10,6 @@ O projeto é composto por **4 fluxos principais**:
 - **Teams (Times)**: Gerenciamento de times de futebol.
 - **Users e Login (Pessoas Usuárias e Credenciais de Acesso)**: Autenticação e gerenciamento de usuários.
 - **Matches (Partidas)**: Cadastro e gerenciamento de partidas de futebol.
-<<<<<<< HEAD
 - **Leaderboards (Placares)**: Cálculo e exibição de tabelas de classificação.
-=======
 - **Leaderboards (Placares)**: Cálculo e exibição de tabelas de classificação.
 >>>>>>> c34a0ad (Update README.md)
